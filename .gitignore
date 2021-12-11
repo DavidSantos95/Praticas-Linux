@@ -1,10 +1,31 @@
-.DS_Store
-applet
-application.linux-arm64
-application.linux-armv6hf
-application.linux32
-application.linux64
-application.windows32
-application.windows64
-application.macosx
-out
+Fixa ip de rede interna no linux ubuntu
+
+Passo a passo
+
+1- sudo su
+colocar sua senha
+
+2 - ipaddr
+ver ser as placas de rede  estão ativ
+
+3 - nano /etc/netplan/50-cloud-init.yaml
+agora está dentro, no editou de texto no linux
+
+iremos fazer as configurações necessarias para fixa ip na rd interna
+
+network:
+	 ehternets:
+	 		 enp0s8:
+    			 addresses: [192.168.0.1/24] o ip é algo que você vai escolher qual colocar 
+    			 gateway4: 192.168.0.0
+					 dhcp4: false
+					 optional: true
+					 nameservers:
+					 					addresses: [8.8.8.8, 1.1.1.1]
+
+após finalizado a configuração apete Ctrl + o para salva e Ctrl + x pra sair
+
+4 - netplan try
+5 - netplan apply
+
+agora só usar o comando "ipaddr" para ver as alterações feita. 
